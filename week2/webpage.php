@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * A Basic webpage class to generate and render a html page
+ * 
+ * @author scrub w19019810
+ */
 class Webpage{
 
     private $head = "";
@@ -56,7 +60,8 @@ EOT;
 
 class ContactPage extends Webpage{
     public function __construct($title, $h1){
-
+        parent::__construct($title, $h1);
+        $this->addContact();
     }
     private function addContact(){
         $this->setBody($this->getBody() . "<section>contact</section>");
