@@ -1,0 +1,10 @@
+<?php
+function autoloader($classname){
+    $fn = "src\\" . strtolower($classname) . ".php";
+    $fn = str_replace('\\', DIRECTORY_SEPARATOR, $fn);
+
+    if(is_readable($fn)){
+        include_once($fn);
+    }else exit("File not found: $fn");
+}
+?>

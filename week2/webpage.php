@@ -10,8 +10,8 @@ class Webpage{
     private $body = "";
     private $foot = "";
 
-    public function __construct($title, $heading, $stylesheet){
-        $this->setHead($title, $stylesheet);
+    public function __construct($title, $heading){
+        $this->setHead($title);
         $this->addH1($heading);
     }
 
@@ -24,7 +24,7 @@ class Webpage{
     private function getHead(){
         return $this->head;
     }
-    protected function setHead($title, $stylesheet){
+    protected function setHead($title){
         $this->head = <<<EOT
         <html>
             <head>
@@ -33,7 +33,7 @@ class Webpage{
                 <title>$title</title>
                 <meta name="description" content="">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
-                <link rel="stylesheet" href="$stylesheet">
+                <link rel="stylesheet" href="">
             </head>
         <body>
 EOT;

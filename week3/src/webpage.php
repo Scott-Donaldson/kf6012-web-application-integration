@@ -10,8 +10,8 @@ class Webpage{
     private $body = "";
     private $foot = "";
 
-    public function __construct($title, $heading){
-        $this->setHead($title);
+    public function __construct($title, $heading, $stylesheet){
+        $this->setHead($title, $stylesheet);
         $this->addH1($heading);
     }
 
@@ -24,7 +24,7 @@ class Webpage{
     private function getHead(){
         return $this->head;
     }
-    protected function setHead($title){
+    protected function setHead($title, $stylesheet){
         $this->head = <<<EOT
         <html>
             <head>
@@ -33,7 +33,7 @@ class Webpage{
                 <title>$title</title>
                 <meta name="description" content="">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
-                <link rel="stylesheet" href="">
+                <link rel="stylesheet" href="$stylesheet">
             </head>
         <body>
 EOT;
@@ -55,26 +55,6 @@ EOT;
     }
     protected function addH1($text){
          $this->setBody($this->getBody() . "<h1>$text</h1>");
-    }
-}
-
-class ContactPage extends Webpage{
-    public function __construct($title, $h1){
-        parent::__construct($title, $h1);
-        $this->addContact();
-    }
-    private function addContact(){
-        $this->setBody($this->getBody() . "<section>contact</section>");
-    }
-}
-
-class HomePage extends Webpage{
-    public function __construct($title, $h1, $h2){
-        parent::__construct($title, $h1);
-        $this->addH2($h2);
-    }
-    private function addH2($text){
-        $this->setBody($this->getBody() . "<h2>$text</h2>");
     }
 }
 ?>
