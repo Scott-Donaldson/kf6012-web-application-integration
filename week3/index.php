@@ -16,6 +16,10 @@ $arr3['week2'] = "Object Oriented PHP";
 $arr3['week3'] = "Web API";
 $arr3['week4'] = "SQLite databases";
 
+include_once '../week4/src/database.php';
+
+$db = new Database("../week4/db/films2021.sqlite");
+
 $req = new Request();
 
 if($req->isAPI()){
@@ -31,6 +35,14 @@ if($req->isAPI()){
         case "topics":
             $req = new JSONResponse($arr3);
             echo $req->sendResponse($arr3);       
+            break;
+        case 'films':
+            $res = $db->execute("select title from film");
+            echo json_encode($res);
+            break;
+        case 'actors':
+            $res = $db->execute("select first_name, last_name from actor");
+            echo json_encode($res);
             break;
         default:
             echo JSONResponse::sendError("404","API Endpoint not found", "The Endpoint you are looking for might have been moved?");
