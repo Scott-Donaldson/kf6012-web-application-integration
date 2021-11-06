@@ -48,6 +48,7 @@ if($req->isAPI()){
         case 'contact':
             break;
         case 'documentation':
+            $controller = new DocumentController($res, $req);
             break;
         default: 
             break;

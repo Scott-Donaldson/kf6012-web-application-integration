@@ -13,9 +13,10 @@ class Webpage{
     public function __construct($title, $heading, $stylesheet){
         $this->setHead($title, $stylesheet);
         $this->addH1($heading);
+        $this->setFoot();
     }
 
-    protected function addParagraph($text){
+    public function addParagraph($text){
         $this->body .= $text;
     }
     public function generateWebpage(){
