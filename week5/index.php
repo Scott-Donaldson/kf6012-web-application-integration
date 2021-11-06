@@ -19,32 +19,24 @@ $db = new Database(DATABASE);
 
 $req = new Request();
 
+$res = ($req->isApi())
+    ? new JSONResponse()
+    : new HTMLResponse();
+
 if($req->isAPI()){
     switch($req->getAPIPath()){
-        case "":
-            $req = new JSONResponse($arr1);
-            echo $req->sendResponse($arr1);            
+        case "":         
             break;
-        case "meals":
-            $req = new JSONResponse($arr2);
-            echo $req->sendResponse($arr2);       
+        case "meals":   
             break;
         case "topics":
-            $req = new JSONResponse($arr3);
-            echo $req->sendResponse($arr3);       
             break;
         case 'films':
-            $res = $db->execute("select title from film");
-            echo json_encode($res);
             break;
         case 'actors':
-            $id = $req->getParam("id");
-            if(empty($id)) $res = $db->execute("select first_name, last_name from actor");
-            else $res = $db->execute("select first_name, last_name from actor WHERE actor_id = :id", ['id' => $id]);
-            echo json_encode($res);
+            $controller = new ApiActorController($res,$req);
             break;
         default:
-            echo JSONResponse::sendError("404","API Endpoint not found", "The Endpoint you are looking for might have been moved?");
             break;
     }
 }else{
@@ -52,20 +44,14 @@ if($req->isAPI()){
     switch($req->getPath()){
         case '':
         case 'home':
-            $home_page = new HomePage("Welcome", "Home", "Test", $css);
-            echo $home_page->generateWebpage();
             break;
         case 'contact':
-            $contact_page = new ContactPage("Contact Page", "Contact Us", $css);
-            echo $contact_page->generateWebpage();
             break;
         case 'documentation':
-        $documentation_page = new Webpage("Documentation Page", "Documentation", $css);
-        echo $documentation_page->generateWebpage();
             break;
         default: 
-            echo "Err404 Page not found";
             break;
     }
 }
+echo $res->getData();
 ?>

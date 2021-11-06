@@ -24,7 +24,7 @@ class Request{
     public function getAPIPath(){
         return trim(preg_replace("/^api/","",$this->getPath()), "/");
     }
-    public function getParam($param){
+    public function getParameter($param){
         $param = filter_input(INPUT_GET, $param, FILTER_SANITIZE_SPECIAL_CHARS);
         return $param;
     }

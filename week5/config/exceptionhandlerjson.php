@@ -1,7 +1,7 @@
 <?php
 
 function exceptionHandlerJson($e){
-    if(DEV_MODE) $message = $e->getMessage();
+    if(DEV_MODE) $message = $e->getMessage() . "| File: ".$e->getFile() . "| Line: ". $e->getLine();
     else $message = "";
     header("Access-Control-Allow-Origin: *"); 
     header("Content-Type: application/json; charset=UTF-8"); 
