@@ -1,0 +1,22 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "KF5012",
+            "database": "D:\\University\\KF5012 - Software Engineering Practice\\Project\\KF5012Project\\db.sq3"
+        },
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "Test",
+            "database": "C:\\Users\\Scrub\\Downloads\\capytecDatabase.db"
+        },
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "KF6012 Workshop",
+            "database": "${workspaceFolder:kf6012-web-application-integration}/week6/part1/src/database/films2021.sqlite"
+        }
+    ]
+}
