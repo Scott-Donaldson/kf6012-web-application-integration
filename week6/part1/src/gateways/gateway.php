@@ -18,4 +18,15 @@ abstract class Gateway {
     public function getResult(){
         return $this->result;
     }
+    public function getTime(){
+       return date("Y-m-d-H:i:s");
+    }
+    public function getCount(){
+        return count($this->result);
+    }
+    public function getNext($limit, $offset){
+        $next_offset = (int)$offset + (int)$limit;
+        $params = "?limit=$limit&offset=$next_offset" ;
+        return $_SERVER['HTTP_HOST'] . strtok($_SERVER['REQUEST_URI'], '?') . $params;
+    }
 }

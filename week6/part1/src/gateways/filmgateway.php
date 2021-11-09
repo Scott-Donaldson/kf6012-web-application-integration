@@ -21,6 +21,12 @@ class FilmGateway extends GatewaysGateway{
         $params = [":id" => $id];
         $res = $this->database->executeSQL($sql, $params);
         $this->setResult($res);
-        print_r($res);
+    }
+
+    public function findByOffset($limit, $offset){
+        $sql = "SELECT * FROM film ORDER BY title LIMIT :a offset :b";
+        $params = [":a" => $limit, ":b" => $offset];
+        $res = $this->database->executeSQL($sql, $params);
+        $this->setResult($res);
     }
 }
