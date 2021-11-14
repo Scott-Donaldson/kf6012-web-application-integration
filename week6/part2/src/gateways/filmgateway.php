@@ -5,28 +5,45 @@ use Src\Database\Database;
 use Src\Gateways\Gateway as GatewaysGateway;
 
 class FilmGateway extends GatewaysGateway{
+    private $sql = "SELECT film.title, film.description, film.length, film.rating, language.name AS language, category.name AS category 
+                   FROM film 
+                   JOIN language ON (film.language_id = language.language_id)
+                   JOIN category ON (film.category_id = category.category_id)";
     private $database;
     public function __construct(){
         $this->database = new Database(DATABASE);
     }
 
     public function findAll(){
-        $sql = "SELECT * FROM film";
-        $res = $this->database->executeSQL($sql);
+        $res = $this->database->executeSQL($this->sql);
         $this->setResult($res);
     }
 
     public function findOne($id){
-        $sql = "SELECT * FROM film WHERE film_id = :id";
+        $this->sql .= "WHERE film_id = :id";
         $params = [":id" => $id];
-        $res = $this->database->executeSQL($sql, $params);
+        $res = $this->database->executeSQL($this->sql, $params);
         $this->setResult($res);
     }
 
     public function findByOffset($limit, $offset){
-        $sql = "SELECT * FROM film ORDER BY title LIMIT :a offset :b";
+        $this->sql .= "ORDER BY title LIMIT :a OFFSET :b";
         $params = [":a" => $limit, ":b" => $offset];
-        $res = $this->database->executeSQL($sql, $params);
+        $res = $this->database->executeSQL($this->sql, $params);
+        $this->setResult($res);
+    }
+
+    public function findLanguage($lang_name){
+        $this->sql .= "WHERE language.name = :name";
+        $params = [":name" => $lang_name];
+        $res = $this->database->executeSQL($this->sql, $params);
+        $this->setResult($res);
+    }
+
+    public function findActor($actor_id){
+        $this->sql .= "WHERE actor_id = :id";
+        $params = [":id" => $actor_id];
+        $res = $this->database->executeSQL($this->sql, $params);
         $this->setResult($res);
     }
 }

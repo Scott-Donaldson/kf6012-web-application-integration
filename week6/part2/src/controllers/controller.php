@@ -26,7 +26,7 @@ abstract class Controller{
     private function setResponse($res){
         $this->response = $res;
     }
-    private function getResponse(){
+    protected function getResponse(){
         return $this->response;
     }
     protected function setGateway(){
