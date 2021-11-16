@@ -2,7 +2,7 @@
 include 'config/autoloader.php';
 spl_autoload_register('autoloader');
 
-define('BASEPATH', '/week6/part1/');
+define('BASEPATH', '/week6/part2/');
 define('DATABASE', 'src/database/films2021.sqlite');
 define('DEVMODE', true);
 
