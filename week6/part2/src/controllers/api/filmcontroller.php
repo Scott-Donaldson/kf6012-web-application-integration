@@ -14,6 +14,7 @@ class FilmController extends Controller{
         if($this->getRequest()->getRequestMethod() !== "GET"){
             $this->getResponse()->setMessage("Method not allowed");
             $this->getResponse()->setStatusCode("405");
+            return $this->response;
         };
 
         $id = $this->getRequest()->getParameter("id");

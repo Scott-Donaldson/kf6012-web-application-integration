@@ -14,6 +14,9 @@ class JSONResponse extends Response{
     public function setMessage($msg){
         $this->message = $msg;
     }
+    public function setStatusCode($code){
+        $this->statusCode = $code;
+    }
     public function getData(){
 
         if(is_null($this->message)){
