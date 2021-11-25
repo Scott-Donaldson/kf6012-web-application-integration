@@ -18,7 +18,6 @@ class JSONResponse extends Response{
         $this->statusCode = $code;
     }
     public function getData(){
-
         if(is_null($this->message)){
             if(count($this->data) == 0){
                 $this->message = "No Content"; 
@@ -28,6 +27,7 @@ class JSONResponse extends Response{
                 $this->statusCode = 200;
             }
         }
+
 
         if($this->statusCode == 200){
             $res = Array(
