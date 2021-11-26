@@ -8,7 +8,7 @@ class Films extends React.Component{
     }
 
     filterFunc = (film) => {return film.language === this.props.language || this.props.language === ""}
-    
+
     async componentDidMount(){
         let url = "http://localhost/week6/part2/api/films"
         
@@ -25,10 +25,14 @@ class Films extends React.Component{
         }
     }
     render(){
-        if (this.props.search !== "") this.filterFunc = (film) => {return film.title.toLowerCase().includes(this.props.search.toLowerCase()) || film.description.toLowerCase().includes(this.props.search.toLowerCase())}
-        else if(this.props.language !== "") this.filterFunc = (film) => {return film.language === this.props.language || this.props.language === ""}
+        let filterFunctions = []
+        if (this.props.search !== "") filterFunctions.push( (film) => {return film.title.toLowerCase().includes(this.props.search.toLowerCase()) || film.description.toLowerCase().includes(this.props.search.toLowerCase())})
+        if(this.props.language !== "") filterFunctions.push( (film) => {return film.language === this.props.language || this.props.language === ""})
+        let filteredResults = this.state.results
 
-        let filteredResults = this.state.results.filter(this.filterFunc)
+        filterFunctions.forEach(func => {
+            filteredResults = filteredResults.filter(func)
+        })
 
         let noData = ""
         if(!this.state.results.length || !filteredResults.length) noData = <p>No Data</p>
