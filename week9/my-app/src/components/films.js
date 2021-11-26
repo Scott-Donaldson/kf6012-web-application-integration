@@ -8,6 +8,7 @@ class Films extends React.Component{
     }
 
     filterFunc = (film) => {return film.language === this.props.language || this.props.language === ""}
+    
     async componentDidMount(){
         let url = "http://localhost/week6/part2/api/films"
         
@@ -22,12 +23,8 @@ class Films extends React.Component{
         }catch(e){
             console.log("Something went wrong", e)
         }
-
-
     }
     render(){
-
-
         if (this.props.search !== "") this.filterFunc = (film) => {return film.title.toLowerCase().includes(this.props.search.toLowerCase()) || film.description.toLowerCase().includes(this.props.search.toLowerCase())}
         else if(this.props.language !== "") this.filterFunc = (film) => {return film.language === this.props.language || this.props.language === ""}
 
