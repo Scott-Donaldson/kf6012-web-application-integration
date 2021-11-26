@@ -26,14 +26,15 @@ class Films extends React.Component{
 
     }
     render(){
-        let noData = ""
-        if(!this.state.results.length) noData = <p>No Data</p>
+
 
         if (this.props.search !== "") this.filterFunc = (film) => {return film.title.toLowerCase().includes(this.props.search.toLowerCase()) || film.description.toLowerCase().includes(this.props.search.toLowerCase())}
         else if(this.props.language !== "") this.filterFunc = (film) => {return film.language === this.props.language || this.props.language === ""}
 
         let filteredResults = this.state.results.filter(this.filterFunc)
 
+        let noData = ""
+        if(!this.state.results.length || !filteredResults.length) noData = <p>No Data</p>
         return(
             <div>
                 {noData}
