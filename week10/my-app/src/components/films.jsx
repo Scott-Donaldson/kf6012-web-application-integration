@@ -7,8 +7,6 @@ class Films extends React.Component{
         this.state = { results: []}
     }
 
-    filterFunc = (film) => {return film.language === this.props.language || this.props.language === ""}
-
     async componentDidMount(){
         let url = "http://localhost/week6/part2/api/films"
         

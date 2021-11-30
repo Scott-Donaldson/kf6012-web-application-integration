@@ -11,7 +11,7 @@ class APIRequestHandler extends RequestHandler{
                     $contoller = new Controllers\FilmController($request, $this->response);
                     break;
                 case 'actors':
-                    $this->response = "actors";
+                    $controller = new Controllers\ActorController($request, $this->response);
                     break;
                 default:
                     $controller = new Controllers\DefaultController($request, $this->response);

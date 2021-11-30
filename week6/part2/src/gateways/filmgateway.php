@@ -8,7 +8,7 @@ class FilmGateway extends GatewaysGateway{
     private $sql = "SELECT film.title, film.description, film.length, film.rating, language.name AS language, category.name AS category 
                    FROM film 
                    JOIN language ON (film.language_id = language.language_id)
-                   JOIN category ON (film.category_id = category.category_id)";
+                   JOIN category ON (film.category_id = category.category_id) ";
     private $database;
     public function __construct(){
         $this->database = new Database(DATABASE);
@@ -41,7 +41,7 @@ class FilmGateway extends GatewaysGateway{
     }
 
     public function findActor($actor_id){
-        $this->sql .= "WHERE actor_id = :id";
+        $this->sql .= "JOIN film_actor ON (film.film_id = film_actor.film_id) WHERE film_actor.actor_id = :id";
         $params = [":id" => $actor_id];
         $res = $this->database->executeSQL($this->sql, $params);
         $this->setResult($res);

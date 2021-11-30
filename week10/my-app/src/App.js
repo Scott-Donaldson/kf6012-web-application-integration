@@ -1,6 +1,7 @@
 import {BrowserRouter, Routes, Route, Link} from 'react-router-dom'
 import HomePage from './components/homepage';
 import FilmPage from './components/filmpage';
+import ActorPage from './components/actorpage';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
           <Routes>
             <Route path='/' element={<HomePage/>} />
             <Route path='films' element={<FilmPage />} />
-            <Route path='actors' element={<p>Actors Page</p>} />
+            <Route path='actors' element={<ActorPage/>} />
             <Route path='*' element={<p>Not Found</p>} />
           </Routes>
         </div>
