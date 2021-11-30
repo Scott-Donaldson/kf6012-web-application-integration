@@ -24,6 +24,7 @@ class Films extends React.Component{
     }
     render(){
         let filterFunctions = []
+        console.log(this.props.search)
         if (this.props.search !== "" && this.props.search !== undefined) filterFunctions.push( (film) => {return film.title.toLowerCase().includes(this.props.search.toLowerCase()) || film.description.toLowerCase().includes(this.props.search.toLowerCase())})
         if(this.props.language !== "" && this.props.language !== undefined) filterFunctions.push( (film) => {return film.language === this.props.language || this.props.language === ""})
         let filteredResults = this.state.results
@@ -32,12 +33,28 @@ class Films extends React.Component{
             filteredResults = filteredResults.filter(func)
         })
 
+        let buttons = ""
+        if(this.props.page !== undefined){
+            let pageSize = this.props.pageSize || 10;
+            let pageMax = this.props.page * pageSize;
+            let pageMin = pageMax - pageSize
+            buttons = (
+                <div>
+                    <button onClick={this.props.handlePreviousClick} disabled={this.props.page <= 1}>Previous</button>
+                    <button onClick={this.props.handleNextClick} disabled={this.props.page >= Math.ceil(filteredResults.length / pageSize)}>Next</button>
+                    <p>Page {this.props.page} of {Math.ceil(filteredResults.length/pageSize)}</p>
+                </div>
+            )
+            filteredResults = filteredResults.slice(pageMin, pageMax)
+        }
+
         let noData = ""
         if(!this.state.results.length || !filteredResults.length) noData = <p>No Data</p>
         return(
             <div>
                 {noData}
                 {filteredResults.map( (film, i) => (<Film key={`${i}:${film.title}`}film={film}/>))}
+                {buttons}
             </div>
         )
     }
