@@ -24,7 +24,7 @@ class Films extends React.Component{
     }
     render(){
         let filterFunctions = []
-        console.log(this.props.search)
+
         if (this.props.search !== "" && this.props.search !== undefined) filterFunctions.push( (film) => {return film.title.toLowerCase().includes(this.props.search.toLowerCase()) || film.description.toLowerCase().includes(this.props.search.toLowerCase())})
         if(this.props.language !== "" && this.props.language !== undefined) filterFunctions.push( (film) => {return film.language === this.props.language || this.props.language === ""})
         let filteredResults = this.state.results
