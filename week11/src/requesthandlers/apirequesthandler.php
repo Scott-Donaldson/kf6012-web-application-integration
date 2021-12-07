@@ -13,6 +13,8 @@ class APIRequestHandler extends RequestHandler{
                 case 'actors':
                     $controller = new Controllers\ActorController($request, $this->response);
                     break;
+                case 'authenticate':
+                    $controller = new Controllers\AuthenticationController($request, $this->response);
                 default:
                     $controller = new Controllers\DefaultController($request, $this->response);
                     break;
