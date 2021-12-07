@@ -21,10 +21,14 @@ class Actors extends React.Component{
         }
     }
     render(){
+
         let filterFunctions = []
-        if(this.props.search !== "" && this.props.search !== undefined) filterFunctions.push( (actor) => {return actor.first_name.toLowerCase().includes(this.props.search.toLowerCase()) || actor.last_name.toLowerCase().includes(this.props.search.toLowerCase())})
+        if(this.props.search !== "" && this.props.search !== undefined) filterFunctions.push( x => {return `${x.first_name} ${x.last_name}`.toLowerCase().includes(this.props.search.toLowerCase())})
+
         let filteredResults = this.state.results
         filterFunctions.forEach(func => {filteredResults = filteredResults.filter(func)})
+
+
 
         let noData = ""
         if(!this.state.results.length || !filteredResults.length) noData = <p>No Data</p>
