@@ -1,4 +1,5 @@
 import React from 'react'
+import Logout from '../logout'
 import Login from './login'
 
 class ViewingListPage extends React.Component{
@@ -67,10 +68,10 @@ class ViewingListPage extends React.Component{
             />
         )
         if(this.state.authenticated) page = (
-            <div>
-                <p>Hello, {this.state.email.split("@")[0]}</p>
-                <button onClick={this.handleLogoutClick}>Log Out</button>
-            </div>
+            <Logout
+                email={this.state.email}
+                handleLogoutClick={this.handleLogoutClick}
+            />
         )
 
         return(<div>{page}</div>)
