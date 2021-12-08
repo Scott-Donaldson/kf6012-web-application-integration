@@ -2,6 +2,7 @@
 
 namespace Src\Controllers\Api;
 
+use Src\Firebase\JWT\JWT;
 use Src\Controllers\Controller;
 use Src\Gateways\AuthenticationGateway;
 
@@ -19,16 +20,23 @@ class AuthenticationController extends Controller {
             return;
         }
 
-        $email = $this->getRequest->getParameter("email");
-        $password = $this->getRequest->getParameter("password");
+        $email = $this->getRequest()->getParameter("email");
+        $password = $this->getRequest()->getParameter("password");
 
         if(!is_null($email) && !is_null($password)){
-            $this->getGateway->findPassword($email);
+            $this->getGateway()->findPassword($email);
 
             if(count($this->getGateway()->getResult()) == 1){
-                $hashedpassword = $this->getGateway->getResult()[0]['password'];
+                $hashedpassword = $this->getGateway()->getResult()[0]['password'];
 
-                if(password_verify($password, $hashedpassword)) $data['token'] = "1234";
+                $key = SECRET_KEY;
+                $payload = Array(
+                    "user_id" => $email,
+                    "exp" => time() + 7776000
+                );
+                $jwt = JWT::encode($payload, $key, 'HS256');
+
+                if(password_verify($password, $hashedpassword)) $data['token'] = $jwt;
 
             }
         }
@@ -37,7 +45,6 @@ class AuthenticationController extends Controller {
             $this->getResponse()->setMessage("Unauthorized");
             $this->getResponse()->setStatusCode(401);
         }
-
         return $data;
     }
 }
