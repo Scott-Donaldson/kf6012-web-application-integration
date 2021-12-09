@@ -1,6 +1,7 @@
 import React from 'react'
 import Logout from '../logout'
 import Login from './login'
+import ViewingList from './viewinglist'
 
 class ViewingListPage extends React.Component{
     constructor(props){
@@ -68,10 +69,13 @@ class ViewingListPage extends React.Component{
             />
         )
         if(this.state.authenticated) page = (
+            <div>
             <Logout
                 email={this.state.email}
                 handleLogoutClick={this.handleLogoutClick}
             />
+            <ViewingList/>
+            </div>
         )
 
         return(<div>{page}</div>)

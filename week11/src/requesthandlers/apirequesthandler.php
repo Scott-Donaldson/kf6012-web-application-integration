@@ -16,6 +16,9 @@ class APIRequestHandler extends RequestHandler{
                 case 'authenticate':
                     $controller = new Controllers\AuthenticationController($request, $this->response);
                     break;
+                case 'viewinglist':
+                    $controller = new Controllers\ViewingListController($request, $this->response);
+                    break;
                 default:
                     $controller = new Controllers\DefaultController($request, $this->response);
                     break;

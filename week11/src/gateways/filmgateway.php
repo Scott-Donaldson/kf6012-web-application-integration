@@ -5,7 +5,7 @@ use Src\Database\Database;
 use Src\Gateways\Gateway as GatewaysGateway;
 
 class FilmGateway extends GatewaysGateway{
-    private $sql = "SELECT film.title, film.description, film.length, film.rating, language.name AS language, category.name AS category 
+    private $sql = "SELECT film.film_id, film.title, film.description, film.length, film.rating, language.name AS language, category.name AS category 
                    FROM film 
                    JOIN language ON (film.language_id = language.language_id)
                    JOIN category ON (film.category_id = category.category_id) ";
